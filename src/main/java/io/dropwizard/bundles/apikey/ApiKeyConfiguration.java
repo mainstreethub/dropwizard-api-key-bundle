@@ -2,14 +2,26 @@ package io.dropwizard.bundles.apikey;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 public class ApiKeyConfiguration {
+  private final String cacheSpec;
   private final AuthConfiguration basicConfiguration;
 
   @JsonCreator
-  ApiKeyConfiguration(@JsonProperty("basic-http") AuthConfiguration basicConfiguration) {
+  ApiKeyConfiguration(
+      @JsonProperty("cache-spec") String cacheSpec,
+      @JsonProperty("basic-http") AuthConfiguration basicConfiguration) {
+    this.cacheSpec = cacheSpec;
     this.basicConfiguration = basicConfiguration;
+  }
+
+  /**
+   * The configuration for how API keys should be cached.  Can be missing.
+   */
+  @JsonProperty("cache-spec")
+  public Optional<String> getCacheSpec() {
+    return Optional.ofNullable(cacheSpec);
   }
 
   /**
@@ -17,6 +29,6 @@ public class ApiKeyConfiguration {
    */
   @JsonProperty("basic-http")
   public Optional<AuthConfiguration> getBasicConfiguration() {
-    return Optional.fromNullable(basicConfiguration);
+    return Optional.ofNullable(basicConfiguration);
   }
 }
