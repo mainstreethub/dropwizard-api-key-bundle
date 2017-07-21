@@ -23,13 +23,6 @@
     </license>
   </licenses>
 
-  <scm>
-    <url>http://github.com/mainstreethub/dropwizard-api-key-bundle</url>
-    <connection>scm:git:git@github.com:mainstreethub/dropwizard-api-key-bundle.git</connection>
-    <developerConnection>scm:git:git@github.com:mainstreethub/dropwizard-api-key-bundle.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
-
   <developers>
     <developer>
       <id>bbeck</id>
