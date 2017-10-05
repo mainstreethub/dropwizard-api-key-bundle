@@ -5,11 +5,11 @@
   <parent>
     <groupId>com.mainstreethub</groupId>
     <artifactId>parent-pom</artifactId>
-    <version>1.5.1</version>
+    <version>1.6.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>dropwizard-api-key-bundle</artifactId>
-  <version>1.0.1-SNAPSHOT</version>  <!-- Make sure to keep this in sync with the dropwizard version below. -->
+  <version>1.1.4-SNAPSHOT</version>  <!-- Make sure to keep this in sync with the dropwizard version below. -->
   <packaging>jar</packaging>
 
   <name>dropwizard-api-key-bundle</name>
@@ -40,10 +40,10 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <dropwizard.version>1.0.2</dropwizard.version>
-    <jersey.version>2.23.1</jersey.version>
+    <dropwizard.version>1.1.4</dropwizard.version>
+    <jersey.version>2.25.1</jersey.version>
     <junit.version>4.12</junit.version>
-    <mockito.version>1.10.19</mockito.version>
+    <mockito.version>2.7.12</mockito.version>
   </properties>
 
   <build>
@@ -51,7 +51,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.6.0</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -62,7 +62,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.1</version>
+        <version>2.5.3</version>
         <configuration>
           <tagNameFormat>v@{project.version}</tagNameFormat>
         </configuration>
@@ -72,21 +72,88 @@
 
   <dependencies>
     <!-- Dropwizard -->
+    <!-- The exclusions are required as Dropwizard seems to be having issues regarding the versioning
+     of packages its internal components use -->
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-core</artifactId>
       <version>${dropwizard.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>joda-time</groupId>
+          <artifactId>joda-time</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-validator</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
+
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-auth</artifactId>
       <version>${dropwizard.version}</version>
     </dependency>
+
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-testing</artifactId>
       <version>${dropwizard.version}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.objenesis</groupId>
+          <artifactId>objenesis</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>21.0</version>
+    </dependency>
+
+    <!-- Needed to fix warning "Cannot find annotation method 'value()' in type
+      'com.google.errorprone.annotations.CompatibleWith ...-->
+    <dependency>
+      <groupId>com.google.errorprone</groupId>
+      <artifactId>error_prone_annotations</artifactId>
+      <version>2.0.15</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.24</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.objenesis</groupId>
+      <artifactId>objenesis</artifactId>
+      <version>2.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.9.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>5.3.4.Final</version>
     </dependency>
 
     <!-- Grizzly -->
