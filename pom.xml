@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>dropwizard-api-key-bundle</artifactId>
-  <version>1.1.4-SNAPSHOT</version>  <!-- Make sure to keep this in sync with the dropwizard version below. -->
+  <version>1.1.4-1-SNAPSHOT</version>  <!-- Make sure to keep this in sync with the dropwizard version below. -->
   <packaging>jar</packaging>
 
   <name>dropwizard-api-key-bundle</name>
