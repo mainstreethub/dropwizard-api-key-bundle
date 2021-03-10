@@ -7,4 +7,4 @@ def notifier = new Notifier([
 ])
 
 new Pipeline(this)
-  .run([notifier: notifier])
+  .run([notifier: notifier, isOpenSource: false])
